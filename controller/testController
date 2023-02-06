@@ -1,0 +1,11 @@
+module.exports = (router) => {
+
+    // [test1] test get method
+    router.get('/test', (req, res, next) => {
+        asyncWrapper.controller(req, next, async (param) => {
+            let result = { a: [1, 2, 3], b: { bb: 1, bbb: 2 } };
+            res.send(response.success(result));
+        });
+    });
+
+}
