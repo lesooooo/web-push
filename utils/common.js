@@ -80,14 +80,26 @@ function ValidatePagingParam(param) {
     return param;
 }
 
-function CalcPaging(list, pageIndex, pageCount, totalCount) {
+// function CalcPaging(list, pageIndex, pageCount, totalCount) {
+//     return {
+//         list: list,
+//         pageIndex: Number(pageIndex),
+//         pageTotal: Math.ceil(totalCount[0].total / pageCount),
+//         totalCount: totalCount[0].total,
+//     };
+// }
+
+function CalcPaging(list, start_idx, count, total_count) { 
     return {
-        list: list,
-        pageIndex: Number(pageIndex),
-        pageTotal: Math.ceil(totalCount[0].total / pageCount),
-        totalCount: totalCount[0].total,
-    };
-}
+        result: list,
+        paging: {
+            start_idx : start_idx,
+            count : count, 
+            total_count : total_count
+        }
+    }
+}   
+
 
 function findNextId(id) {
     if (id) {
