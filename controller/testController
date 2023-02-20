@@ -8,23 +8,48 @@ module.exports = (router) => {
        });
    });
 
-   //로그인
+
+//로그인
    router.post('/users/login', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {
         let result = {
             rslt : 1, 
             api : "http://abcd.abcd", 
-            push : "wss://abcde.abc"
+            push : "wss://abcde.abc",
+            access_token : "000.000.000", 
+            refresh_token : "aaa.aaa.aaa"
         };
-        res.send(response.success(result));
+        if(req.head){
+        res.send(response.success(result));}
+        });
+        
+    });
+
+    //로그인 실패
+   router.post('/users/login/fail', (req, res, next) => {
+    asyncWrapper.controller(req, next, async (param) => {
+        res.send(response.fail("500", ""));
         });
     });
+   
     //토큰 갱신
-    router.put('/users/token/refresh/:appid', (req, res, next) => {
+    router.put('/users/token/refresh', (req, res, next) => {
         asyncWrapper.controller(req, next, async (param) => {
             let result = {
-                access_token : "aaa.aaa.aaa", 
+                access_token : "000.000.000", 
                 refresh_token : "aaa.aaa.aaa"
+            };
+            res.send(response.success(result));
+        });
+    });
+    //userinfo
+    router.put('/users/token/userInfo', (req, res, next) => {
+        asyncWrapper.controller(req, next, async (param) => {
+            let userInfo= {
+                userId: "id",
+                userName: "name",
+                userType: "userType",
+                agreeYn: "agree",
             };
             res.send(response.success(result));
         });
@@ -67,7 +92,7 @@ module.exports = (router) => {
    //  현장 목록 조회 실패
    router.get('/sites/:start_idx/:count/fail', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {       
-        res.send(response.fail("204", "no contents"));
+        res.send(response.fail("500", ""));
     });
 });
    //장비상태 조회
@@ -87,7 +112,7 @@ module.exports = (router) => {
    //장비상태 조회 실패
    router.get('/:site_id/device/state/fail', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {       
-        res.send(response.fail("204", "no contents"));
+        res.send(response.fail("500", ""));
     });
 });
 
@@ -136,7 +161,7 @@ module.exports = (router) => {
    //누적된 작업중 이상상황 발생 조회 실패
    router.get('/:site_id/works/state/fail', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {
-        res.send(response.fail("204", "no contents"));
+        res.send(response.fail("500", ""));
     });
 });
 
@@ -186,7 +211,7 @@ module.exports = (router) => {
    //  설비 목록 조회 실패
    router.get('/:site_id/facilities/:start_idx/:count/fail', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {
-        res.send(response.fail("204", "no contents"));
+        res.send(response.fail("500", ""));
     });
 });
 //  센서 목록 조회//
@@ -225,7 +250,7 @@ router.get('/:site_id/sensors/:start_idx/:count', (req, res, next) => {
 //  센서 목록 조회 실패
 router.get('/:site_id/sensors/:start_idx/:count/fail', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {
-        res.send(response.fail("204", "no contents"));
+        res.send(response.fail("500", ""));
     });
  });
 
@@ -266,7 +291,7 @@ router.get('/:site_id/state/:period', (req, res, next) => {
 router.get('/:site_id/state/:period/fail', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {
  
-        res.send(response.fail("204", "no contents"));
+        res.send(response.fail("500", ""));
     });
  });
 
@@ -283,7 +308,7 @@ router.get('/site/solve/:state_id/:proc', (req, res, next) => {
 //  작업공간 상태 처리 조회 실패
 router.get('/site/solve/:state_id/:proc/fail', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {
-        res.send(response.fail("204", "no contents"));
+        res.send(response.fail("500", ""));
     });
  });
 
@@ -303,7 +328,7 @@ router.get('/:site_id/cams/:start_idx/:count', (req, res, next) => {
 //  실시간 영상 주소목록 조회 실패
 router.get('/:site_id/cams/:start_idx/:count/fail', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {
-        res.send(response.fail("204", "no contents"));
+        res.send(response.fail("500", ""));
     });
  });
 
@@ -320,7 +345,7 @@ router.get('/video/:scene_mark_id', (req, res, next) => {
 //  영상재생 실패
 router.get('/video/:scene_mark_id/fail', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {
-        res.send(response.fail("204", "no contents"));
+        res.send(response.fail("500", ""));
     });
  });
  //  알람 정보 요청
@@ -343,7 +368,7 @@ router.get('/alarm/:alarm_id', (req, res, next) => {
   //  알람 정보 요청 실패
 router.get('/alarm/:alarm_id/fail', (req, res, next) => {
     asyncWrapper.controller(req, next, async (param) => {
-        res.send(response.fail("204", "no contents"));
+        res.send(response.fail("500", ""));
     });
  });
 }
