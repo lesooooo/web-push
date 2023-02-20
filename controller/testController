@@ -19,8 +19,8 @@ module.exports = (router) => {
             access_token : "000.000.000", 
             refresh_token : "aaa.aaa.aaa"
         };
-        if(req.head){
-        res.send(response.success(result));}
+    
+        res.send(response.success(result));
         });
         
     });
