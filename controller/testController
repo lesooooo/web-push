@@ -9,18 +9,18 @@ module.exports = (router) => {
        });
    });
 
-//로그인
-router.post('/users/login', (req, res, next) => {
-    asyncWrapper.controller(
-        req,
-        next,
-        async (param) => {
+    //로그인
+    router.post('/users/login', (req, res, next) => {
+        asyncWrapper.controller(
+            req,
+            next,
+            async (param) => {
             
-            let result = await uservice.login(param);//tokenSet 
-            res.send(response.success(result));
-        }
-    );
-});
+                let result = await uservice.login(param);//tokenSet 
+                res.send(response.success(result));
+            }
+        );
+    });
 
     //로그인 실패
    router.post('/users/login/fail', (req, res, next) => {
@@ -131,7 +131,7 @@ router.post('/users/login', (req, res, next) => {
                    name : '누적된 안전장비 미착용 경고', 
                    count  : 4
                }
-              ];     
+              ];
            res.send(response.success(result));
        });
    });
