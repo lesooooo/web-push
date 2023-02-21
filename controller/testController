@@ -17,6 +17,8 @@ module.exports = (router) => {
             async (param) => {
             
                 let result = await uservice.login(param);//tokenSet 
+                result.api="http:///abcd.abcd";
+                result.push="http://abcde.abcde";
                 res.send(response.success(result));
             }
         );
