@@ -1,8 +1,9 @@
 const security = require('../utils/security.js');
 
-let skipUrls = [
-    '/api/user/login/**',
-    '/api/token/refresh',
+let skipUrls = [//jwt 확인 안하는애들
+    '/api/users/login/**',
+    '/api/users/login',
+    '/api/users/token/refresh',
     '/js/**',
     '/images/**',
     '/css/**',
@@ -11,7 +12,7 @@ let skipUrls = [
     '/api/cheat/**'
 ];
 
-function IsSkipUrl(pureUrl) {
+function IsSkipUrl(pureUrl) {//skipUrl 인지 체크
     let isSkipUrl = false;
     for(let i=0; i<skipUrls.length; i++) {
         let url = skipUrls[i];
@@ -46,6 +47,7 @@ module.exports = (app) => {
                 req.body.jwt = security.verifyToken(authorization);
             } catch(e) {
                 next(response.fail(401, '유효하지 않은 토큰입니다.'));
+                console.log(e);
                 return false;
             }
         }

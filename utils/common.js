@@ -91,7 +91,7 @@ function ValidatePagingParam(param) {
 
 function CalcPaging(list, start_idx, count, total_count) { 
     return {
-        result: list,
+        list,
         paging: {
             start_idx : start_idx,
             count : count, 

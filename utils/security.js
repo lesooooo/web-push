@@ -26,15 +26,7 @@ module.exports = {
         let obj = {
             userId: userInfo.userId,
             userName: userInfo.userName,
-            userType: userInfo.userType,
-            agreeYn: userInfo.agreeYn,
         };
-        if (userInfo.groupId) {
-            obj.groupId = userInfo.groupId;
-        }
-        if (userInfo.userRole) {
-            obj.userRole = userInfo.userRole;
-        }
         return obj;
     },
 

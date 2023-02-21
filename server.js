@@ -8,7 +8,7 @@ require('./framework/asyncWrapper.js');// asyncWrapper 글로벌 변수로 등�
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-// const interceptor = require('./framework/interceptor.js');
+const interceptor = require('./framework/interceptor.js');
 const router = require('./router/router.js');
 const runner = require('./runner.js');
 
@@ -33,6 +33,6 @@ let corsOptions = {
 }
 app.use(cors(corsOptions));
 
-// interceptor(app);
+interceptor(app);
 router(app, express);
 runner(app);

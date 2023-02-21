@@ -105,6 +105,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/triple-beam", [\
+        ["npm:1.3.2", {\
+          "packageLocation": "./.yarn/cache/@types-triple-beam-npm-1.3.2-e1699700a8-dd7b4a563f.zip/node_modules/@types/triple-beam/",\
+          "packageDependencies": [\
+            ["@types/triple-beam", "npm:1.3.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["abbrev", [\
         ["npm:1.1.1", {\
           "packageLocation": "./.yarn/cache/abbrev-npm-1.1.1-3659247eab-a4a97ec07d.zip/node_modules/abbrev/",\
@@ -398,7 +407,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fs-minipass", "npm:2.1.0"],\
             ["glob", "npm:8.1.0"],\
             ["infer-owner", "npm:1.0.4"],\
-            ["lru-cache", "npm:7.14.1"],\
+            ["lru-cache", "npm:7.16.1"],\
             ["minipass", "npm:3.3.6"],\
             ["minipass-collect", "npm:1.0.2"],\
             ["minipass-flush", "npm:1.0.5"],\
@@ -1705,11 +1714,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["logform", [\
-        ["npm:2.4.2", {\
-          "packageLocation": "./.yarn/cache/logform-npm-2.4.2-c83969e14e-3d00f4e1cc.zip/node_modules/logform/",\
+        ["npm:2.5.1", {\
+          "packageLocation": "./.yarn/cache/logform-npm-2.5.1-06017d630d-08fdf03be5.zip/node_modules/logform/",\
           "packageDependencies": [\
-            ["logform", "npm:2.4.2"],\
+            ["logform", "npm:2.5.1"],\
             ["@colors/colors", "npm:1.5.0"],\
+            ["@types/triple-beam", "npm:1.3.2"],\
             ["fecha", "npm:4.2.3"],\
             ["ms", "npm:2.1.3"],\
             ["safe-stable-stringify", "npm:2.4.2"],\
@@ -1736,10 +1746,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:7.14.1", {\
-          "packageLocation": "./.yarn/cache/lru-cache-npm-7.14.1-d3ba9407b6-d72c6713c6.zip/node_modules/lru-cache/",\
+        ["npm:7.16.1", {\
+          "packageLocation": "./.yarn/cache/lru-cache-npm-7.16.1-85f2d637d6-64618e3ed4.zip/node_modules/lru-cache/",\
           "packageDependencies": [\
-            ["lru-cache", "npm:7.14.1"]\
+            ["lru-cache", "npm:7.16.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1755,7 +1765,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["http-proxy-agent", "npm:5.0.0"],\
             ["https-proxy-agent", "npm:5.0.1"],\
             ["is-lambda", "npm:1.0.1"],\
-            ["lru-cache", "npm:7.14.1"],\
+            ["lru-cache", "npm:7.16.1"],\
             ["minipass", "npm:3.3.6"],\
             ["minipass-collect", "npm:1.0.2"],\
             ["minipass-fetch", "npm:2.1.2"],\
@@ -1873,10 +1883,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:4.0.2", {\
-          "packageLocation": "./.yarn/cache/minipass-npm-4.0.2-e82aa9f3fb-2e4f4caaf8.zip/node_modules/minipass/",\
+        ["npm:4.0.3", {\
+          "packageLocation": "./.yarn/cache/minipass-npm-4.0.3-25515097a8-a09f405e2f.zip/node_modules/minipass/",\
           "packageDependencies": [\
-            ["minipass", "npm:4.0.2"]\
+            ["minipass", "npm:4.0.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2019,7 +2029,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/named-placeholders-npm-1.1.3-1b385febe5-7834adc91e.zip/node_modules/named-placeholders/",\
           "packageDependencies": [\
             ["named-placeholders", "npm:1.1.3"],\
-            ["lru-cache", "npm:7.14.1"]\
+            ["lru-cache", "npm:7.16.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2712,7 +2722,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tar", "npm:6.1.13"],\
             ["chownr", "npm:2.0.0"],\
             ["fs-minipass", "npm:2.1.0"],\
-            ["minipass", "npm:4.0.2"],\
+            ["minipass", "npm:4.0.3"],\
             ["minizlib", "npm:2.1.2"],\
             ["mkdirp", "npm:1.0.4"],\
             ["yallist", "npm:4.0.0"]\
@@ -2954,7 +2964,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@dabh/diagnostics", "npm:2.0.3"],\
             ["async", "npm:3.2.4"],\
             ["is-stream", "npm:2.0.1"],\
-            ["logform", "npm:2.4.2"],\
+            ["logform", "npm:2.5.1"],\
             ["one-time", "npm:1.0.0"],\
             ["readable-stream", "npm:3.6.0"],\
             ["safe-stable-stringify", "npm:2.4.2"],\
@@ -2996,7 +3006,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/winston-transport-npm-4.5.0-e10bfb2169-a56e5678a8.zip/node_modules/winston-transport/",\
           "packageDependencies": [\
             ["winston-transport", "npm:4.5.0"],\
-            ["logform", "npm:2.4.2"],\
+            ["logform", "npm:2.5.1"],\
             ["readable-stream", "npm:3.6.0"],\
             ["triple-beam", "npm:1.3.0"]\
           ],\
