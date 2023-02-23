@@ -18,13 +18,7 @@
 */
 
 /* eslint-env browser, serviceworker, es6 */
-const express = require('express');//express모듈 사용
-const self = express();//서버 생성
-const port = 3000;//포트번호
 
-self.listen(port, ()=>{
-    console.log(`sever starting...http://localhost:${port}`);
-})
 'use strict';
 self.addEventListener('push', function(event) {
     console.log('[Service Worker] Push Received.');
@@ -32,7 +26,7 @@ self.addEventListener('push', function(event) {
   
     const title = '웹푸시 알림';
     const options = {
-      body: '우히히 내가 띄움',
+      body: '푸시알림 내용',
       icon: 'images/icon.png',
       badge: 'images/badge.png'//푸시알림 내용
     };
