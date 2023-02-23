@@ -14,9 +14,9 @@ function serverStartLog() {
 module.exports = (app) => {
     switch (SERVER_CONFIG.RUNNING_ENV) {
         case 'local':
-        case 'dev':
             app.listen(SERVER_CONFIG.SERVER_PORT, () => serverStartLog());
             break;
+        case 'dev':
         case 'real':
             const options = {
                 pfx: fs.readFileSync(SERVER_CONFIG.SSL.PFX),

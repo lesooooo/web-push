@@ -23,15 +23,16 @@ app.use(express.urlencoded({
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended: false}))
 
-let whitelist = SERVER_CONFIG.CORS_WHITE_LIST;
-let corsOptions = {
-    origin: function(origin, callback) {
-        let isWhitelisted = whitelist.indexOf(origin) !== -1;
-        callback(null, isWhitelisted);
-    },
-    credentials: true
-}
-app.use(cors(corsOptions));
+// let whitelist = SERVER_CONFIG.CORS_WHITE_LIST;
+// let corsOptions = {
+//     origin: function(origin, callback) {
+//         let isWhitelisted = whitelist.indexOf(origin) !== -1;
+//         callback(null, isWhitelisted);
+//     },
+//     credentials: true
+// }
+// app.use(cors(corsOptions));
+app.use(cors());// 임시 모든 origin으로부터 호출 허용
 
 interceptor(app);
 router(app, express);
