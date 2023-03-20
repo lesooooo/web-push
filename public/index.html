@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="test/sw"></script>
+<!-- <script>var admin = require("firebase-admin");
+
+  var serviceAccount = require("../serviceAccountKey.json");
+  
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });</script> -->
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-analytics.js";
+  import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-messaging.js";
+  // import { Messaging } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-admin.js";
+//  import {admin} from "firebase-admin/messaging"
+// import admin from 'firebase-admin';
+
+
+  const firebaseConfig = {
+apiKey: "AIzaSyBqeXy5-7cis4IolM5Ddghf5-UrObf6yzw",
+authDomain: "push-9560d.firebaseapp.com",
+projectId: "push-9560d",
+storageBucket: "push-9560d.appspot.com",
+messagingSenderId: "374015609790",
+appId: "1:374015609790:web:c5e0af0da7dbf1242747ef",
+measurementId: "G-G74173QLK0"
+};
+
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const messaging = getMessaging();
+  
+  const analytics = getAnalytics(app);
+  // const messaging = getToken(app);
+
+
+ // This registration token comes from the client FCM SDKs.
+const registrationTokens= [//n개 구독 토큰 리스트
+  'dOkzaWIujVROOzeSL8AQdG:APA91bE5lsSWt7jg3yqNT2l3Dy6MMKrZCMYfAgL9liKcAv_Q6nsCO4ZdfCJii85V6KiJUIxUj-Z9z8Lc2seMWcfhogrG_qIoTY8oDhqHRKEgdR8BkvEI_K_FcVv-ThpbVT6BjaoHpBxB'];
+
+const message = {
+  data: {
+    score: '850',
+    time: '2:45'
+  },
+  token: registrationToken
+};
+
+// Send a message to the device corresponding to the provided
+// registration token.
+messaging.send(message)
+  .then((response) => {
+    // Response is a message ID string.
+    console.log('Successfully sent message:', response);
+  })
+  .catch((error) => {
+    console.log('Error sending message:', error);
+  });
+</script>
+  
+    <script  type="module" src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app-compat.js"></script>
+    <script type="module"  src="https://www.gstatic.com/firebasejs/9.17.2/firebase-messaging.js"></script>
+
+    <!-- <script type="module"  src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script> -->
+    <!-- <script type="module" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script> -->
+
+
+    <!-- <button id="pushBtn">Push</button> -->
+    <button id="requestPermission" onclick="requestPermission()">Request</button>
+    <button id="subscribe" >Subscribe</button>
+
+
+   
+  </body>
+</html>

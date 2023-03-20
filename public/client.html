@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="test/sw"></script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-analytics.js";
+  import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-messaging.js";
+  // import { getMessaging } from "firebase/messaging";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+apiKey: "AIzaSyBqeXy5-7cis4IolM5Ddghf5-UrObf6yzw",
+authDomain: "push-9560d.firebaseapp.com",
+projectId: "push-9560d",
+storageBucket: "push-9560d.appspot.com",
+messagingSenderId: "374015609790",
+appId: "1:374015609790:web:c5e0af0da7dbf1242747ef",
+measurementId: "G-G74173QLK0"
+};
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const messaging = getMessaging();
+  
+  const analytics = getAnalytics(app);
+  // const messaging = getToken(app);
+
+
+  let swRegistration = null;// sw 설치여부 확인
+  let isSubscribed = false;//구독여부 확인
+
+  if ('serviceWorker' in navigator && 'PushManager' in window) {//sw, pushManager 설치 확인
+console.log('Service Worker and Push are supported');//둘다 설치 o일때
+
+navigator.serviceWorker.register('test/sw')
+.then(function(swReg) {
+  console.log('Service Worker is registered', swReg);
+
+  swRegistration = swReg;
+})
+.catch(function(error) {
+  console.error('Service Worker Error', error);
+});
+} else {
+console.warn('Push messaging is not supported');
+pushButton.textContent = 'Push Not Supported';
+}
+  // let token=getToken(app)
+  getToken(messaging, { 
+vapidKey: 'BPzAyeeu6owc-h_HhwO1CE-OM7mL7nvHBAijxYdRGNq890SejWExhC2SBAdERT1BbIkI0s-I2WkDQWl74j7kSJw' }).then((currentToken) => {
+if (currentToken) {
+// Send the token to your server and update the UI if necessary
+// ...
+console.log(currentToken);
+} else {
+// Show permission request UI
+console.log('No registration token available. Request permission to generate one.');
+// ...
+}
+}).catch((err) => {
+console.log('An error occurred while retrieving token. ', err);
+// ...
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+const loadEl = document.querySelector('#load');
+
+
+// getToken(messaging, {vapidKey: "BPzAyeeu6owc-h_HhwO1CE-OM7mL7nvHBAijxYdRGNq890SejWExhC2SBAdERT1BbIkI0s-I2WkDQWl74j7kSJw"});
+function requestPermission() {
+console.log('Requesting permission...');
+Notification.requestPermission().then((permission) => {
+if (permission === 'granted') {
+  console.log('Notification permission granted.');
+}
+});
+}
+// try {
+// // let app = firebase.app(firebaseConfig);
+// let features = [
+//   'auth', 
+//   'database', 
+//   'firestore',
+//   'functions',
+//   'messaging', 
+//   'storage', 
+//   'analytics', 
+//   'remoteConfig',
+//   'performance',
+// ].filter(feature => typeof app[feature] === 'function');
+// loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+// } catch (e) {
+// console.error(e);
+// loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+// }
+});
+
+////////////////////////////////////////////
+// let isSubscribed = false;//구독여부 확인
+// let swRegistration = null;// sw 설치여부 확인
+const applicationServerPublicKey = 'BL7fzx_jK19fIoFoWOm_namVKWGWUMJNBsqkrPaqFwpv3znRSzM8xbrr7QWQXyYylnHGKTVmRu2DWLBmBnDLfW0';
+const pushButton = document.querySelector('#subscribe');//button 정보 저장
+function urlB64ToUint8Array(base64String) {// encoding, replace
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+if ('serviceWorker' in navigator && 'PushManager' in window) {//sw, pushManager 설치 확인
+  console.log('Service Worker and Push are supported');//둘다 설치 o일때
+
+  navigator.serviceWorker.register('test/sw')
+  .then(function(swReg) {
+    console.log('Service Worker is registered', swReg);
+
+    swRegistration = swReg;
+  })
+  .catch(function(error) {
+    console.error('Service Worker Error', error);
+  });
+} else {
+  console.warn('Push messaging is not supported');
+  // pushButton.textContent = 'Push Not Supported';
+}
+
+
+function initializeUI() {//유저 확인, 구독 여부 확인
+  pushButton.addEventListener('click', function() {//pushButton listener
+    // pushButton.disabled = true;//pushButton 비활성화
+    if (isSubscribed) {//구독한 사람일때 구독 취소(구취 구현 x)
+      unsubscribeUser();
+    } else {
+      subscribeUser();//구독
+    }
+  });
+
+  function subscribeUser() {//유저 구독 처리
+    const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);//서버키 인코딩, 저장
+    swRegistration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: applicationServerKey//푸시매니저에 사용자 key 정보저장
+    })
+    .then(function(subscription) {
+      console.log('User is subscribed.');
+  
+      updateSubscriptionOnServer(subscription);//구독자정보 서버에 업뎃
+  
+      isSubscribed = true;
+  
+      // updateBtn();
+    })
+    .catch(function(error) {
+      console.error('Failed to subscribe the user: ', error);
+      // updateBtn();
+    });
+  }
+  function unsubscribeUser() {
+    swRegistration.pushManager.getSubscription()
+    .then(function(subscription) {
+      if (subscription) {
+        return subscription.unsubscribe();
+      }
+    })
+    .catch(function(error) {
+      console.log('Error unsubscribing', error);
+    })
+    .then(function() {
+      updateSubscriptionOnServer(null);
+  
+      console.log('User is unsubscribed.');
+      isSubscribed = false;
+
+    });
+  }
+  // Set the initial subscription value
+  swRegistration.pushManager.getSubscription()//구독 정보 가져오기
+  .then(function(subscription) {//어디서 받아오는거ㄴ지..pushManager api 인듯?
+    isSubscribed = !(subscription === null);//구독정보 없지 않을때(있을때) true 반환
+
+    updateSubscriptionOnServer(subscription);//구독정보 업뎃
+
+    if (isSubscribed) {//콘솔에 구독 여부 반환
+      console.log('User IS subscribed.');
+    } else {
+      console.log('User is NOT subscribed.');
+    }
+
+  });
+}
+
+
+navigator.serviceWorker.register('test/sw')
+.then(function(swReg) {
+  console.log('Service Worker is registered', swReg);
+
+  swRegistration = swReg;
+  initializeUI();
+})
+
+// swRegistration.pushManager.subscribe({
+//   userVisibleOnly: true,
+//   applicationServerKey: applicationServerKey
+// })
+// .then(function(subscription) {
+//   console.log('User is subscribed.');
+
+//   updateSubscriptionOnServer(subscription);
+
+//   isSubscribed = true;
+
+//   updateBtn();
+
+// })
+// .catch(function(err) {
+//   console.log('Failed to subscribe the user: ', err);
+//   updateBtn();
+// });
+
+function updateSubscriptionOnServer(subscription) {
+  // TODO: Send subscription to application server
+
+  // const subscriptionJson = document.querySelector('.js-subscription-json');//<pre> class 내용 end-point 
+  // const subscriptionDetails =
+  //   document.querySelector('.js-subscription-details');//<section> class
+
+  // if (subscription) {//구독자일때 보이기
+  //   subscriptionJson.textContent = JSON.stringify(subscription);
+  //   subscriptionDetails.classList.remove('is-invisible');
+  // } else {
+  //   subscriptionDetails.classList.add('is-invisible');
+  // }
+  console.log(JSON.stringify(subscription));
+}
+document.addEventListener('DOMContentLoaded', function () {
+    // Firebase Messaging 객체 획득
+    const  messaging = getMessaging();
+    // Add the public key generated from the console here.
+    messaging.usePublicVapidKey("BBO_8w ... Mlfrw8eo");
+    messaging.onMessage(payload => {
+      console.log("Message received. ", payload);
+    });});
+</script>
+  
+    <script  type="module" src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app-compat.js"></script>
+    <script type="module"  src="https://www.gstatic.com/firebasejs/9.17.2/firebase-messaging.js"></script>
+    <!-- <script type="module"  src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script> -->
+    <!-- <script type="module" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script> -->
+
+
+    <!-- <button id="pushBtn">Push</button> -->
+    <button id="requestPermission" onclick="requestPermission()">Request</button>
+    <button id="subscribe" >Subscribe</button>
+
+
+   
+  </body>
+</html>

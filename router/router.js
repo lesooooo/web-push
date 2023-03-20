@@ -1,7 +1,7 @@
 const apiRouter = require('./apiRouter.js');
 
 module.exports = (app, express) => {
-    app.use('/api', apiRouter);// api page 기본 경로
+    app.use('/', apiRouter);// api page 기본 경로
 
     // 404 페이지 처리
     app.use((req, res, next) => {

@@ -34,6 +34,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 // app.use(cors(corsOptions));
 app.use(cors());// 임시 모든 origin으로부터 호출 허용
 
-interceptor(app);
+// interceptor(app);
 router(app, express);
 runner(app);
